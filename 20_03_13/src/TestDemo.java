@@ -1,9 +1,25 @@
 import java.sql.SQLOutput;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class TestDemo {
 
-    //斐波那契数列
+	public static int[] copyArray(int[] array) {
+		int[] ret = new int[array.length];
+		for(int i = 0;i < array.length; i++) {
+			ret[i] = array[i];
+		}
+		return ret;
+	}
+
+	public static void main8(String[] args) {
+	    int[] array = {1,2,3,4,5};
+		int[] ret = copyArray(array);
+		System.out.print(Arrays.toString(ret));
+	}
+
+
+     //斐波那契数列
     public static int fabonacio(int n) {
         if(n == 1 || n == 2) {
             return 1;
@@ -87,7 +103,7 @@ public class TestDemo {
     }
 
     public static void func(int a) {
-        System.out.println(a);
+	    System.out.println(a);
     }
     public static void main1(String[] args) {
         int a = 10;
