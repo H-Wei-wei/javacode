@@ -8,21 +8,31 @@ public class TestDemo {
     public static void main(String[] args) {
         DoubleLinkedList doubleLinkedList = new DoubleLinkedList();
         doubleLinkedList.addFirst(1);
-        doubleLinkedList.addFirst(2);
+        doubleLinkedList.addFirst(4);
         doubleLinkedList.addFirst(3);
         doubleLinkedList.addFirst(4);
         doubleLinkedList.addFirst(5);
-        doubleLinkedList.addLast(0);
+        //doubleLinkedList.addLast(10);
         doubleLinkedList.display();
         System.out.println("链表长度为"+doubleLinkedList.size());
 
         System.out.println("======插入一个数======");
-        doubleLinkedList.addIndex(2,8);
+        doubleLinkedList.addIndex(1,8);
         doubleLinkedList.display();
 
         System.out.println("=====判断是否包含key====");
         System.out.println(doubleLinkedList.contains(9));
 
+        System.out.println(" =====删除第一次出现的key=====");
+        doubleLinkedList.remove(10);
+        doubleLinkedList.display();
+
+        System.out.println("======删除所有的相等的数======");
+        doubleLinkedList.removeAllKey(4);
+        doubleLinkedList.display();
+
+        System.out.println("=======删除所有数======");
+        doubleLinkedList.clear();
 
     }
 

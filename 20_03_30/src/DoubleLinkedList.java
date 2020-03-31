@@ -53,18 +53,26 @@ public class DoubleLinkedList {
         if(index < 0 || index > size()) {
             return;
         }
+        if(index == 0) {
+            addFirst(data);
+            return;
+        }
+        if(index == size()){
+            addLast(data);
+            return;
+        }
         //找index位置
         ListNode cur = findIndex(index);
         //插入node
         ListNode node = new ListNode(data);
-        node.next = cur.next;
-        cur.next.prev = node;
-        node.prev = cur;
-        cur.next = node;
+        node.prev = cur.prev;
+        node.next = cur;
+        cur.prev.next = node;
+        cur.prev = node;
     }
     private  ListNode findIndex(int index){
         ListNode cur = this.head;
-        while(index-1 > 0){
+        while(index > 0){
             cur = cur.next;
             index--;
         }
@@ -85,12 +93,47 @@ public class DoubleLinkedList {
 
     //删除第一次出现关键字为key的节点
     public void remove(int key){
-
+        if(this.head == null) {
+            return;
+        }
+        ListNode cur = this.head;
+        while(cur != null) {
+            if (cur.data == key) {
+                if(cur == this.head) {
+                    this.head = this.head.next;
+                    this.head.prev = null;
+                } else if(cur == this.last){
+                    this.last = this.last.prev;
+                    this.last.next = null;
+                } else {
+                    cur.prev.next = cur.next;
+                    cur.next.prev = cur.prev;
+                }
+                return;
+            } else {
+                cur = cur.next;
+            }
+        }
     }
 
     //删除所有值为key的节点
     public void removeAllKey(int key){
-
+        ListNode cur = this.head;
+        while(cur != null) {
+            if (cur.data == key) {
+                if(cur == this.head) {
+                    this.head = this.head.next;
+                    this.head.prev = null;
+                } else if(cur == this.last){
+                    this.last = this.last.prev;
+                    this.last.next = null;
+                } else {
+                    cur.prev.next = cur.next;
+                    cur.next.prev = cur.prev;
+                }
+            }
+                cur = cur.next;
+        }
     }
 
     //得到单链表的长度
@@ -114,6 +157,7 @@ public class DoubleLinkedList {
     }
 
     public void clear(){
-
+        this.head = null;
+        this.last = null;
     }
 }
