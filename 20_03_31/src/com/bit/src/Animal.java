@@ -1,5 +1,8 @@
+package com.bit.src;
 
 public class Animal {
+    int count;
+    protected String sex;
 
     public String name;
 
