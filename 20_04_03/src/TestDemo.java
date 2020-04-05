@@ -1,3 +1,4 @@
+
 /*
 
 class X{
@@ -21,11 +22,12 @@ public class TestDemo extends X{
     }
 }
 */
-/*
+
+
 
 class Base{
 
-    public Base(String s){
+    public Base(){
 
         System.out.print("B");
 
@@ -33,11 +35,11 @@ class Base{
 
 }
 
-public class Derived extends Base{
+public class TestDemo extends Base{
 
-    public Derived (String s) {
+    public TestDemo () {
 
-        super();
+        //super();
 
         System.out.print("D");
 
@@ -45,14 +47,15 @@ public class Derived extends Base{
 
     public static void main(String[] args){
 
-        new Derived("C");
+        new TestDemo();
 
     }
 }
-*/
 
 
 
+
+/*
 
 class Base {
 
@@ -77,3 +80,4 @@ public class TestDemo extends Base {
     }
 
 }
+*/
