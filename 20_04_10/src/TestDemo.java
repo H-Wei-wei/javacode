@@ -2,7 +2,16 @@ import java.util.Random;
 
 public class TestDemo {
     public static void main(String[] args) {
-
+        int[] arr = {1,2,3,10,11,12};
+        System.out.println(isSorted(arr));
+    }
+    public static boolean isSorted(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static void main6(String[] args) {
