@@ -3,9 +3,9 @@ import java.util.List;
 
 
 class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
 
     TreeNode(int x) {
         val = x;
@@ -13,10 +13,9 @@ class TreeNode {
 
 }
 public class TestTree2{
-     private static List<Integer> built(List<Integer> result) {
+     private static TreeNode built() {
         TreeNode A = new TreeNode(1);
         TreeNode B = new TreeNode(2);
-
         TreeNode C = new TreeNode(3);
         TreeNode D = new TreeNode(4);
         TreeNode E = new TreeNode(5);
@@ -32,32 +31,22 @@ public class TestTree2{
         E.right = H;
         C.right = F;
 
-         result.add(A.val);
-         result.add(B.val);
-         result.add(C.val);
-         result.add(D.val);
-         result.add(E.val);
-         result.add(F.val);
-         result.add(G.val);
-         result.add(H.val);
-
+         return A;
+     }
+     public static List<Integer> preOrderTraversal(TreeNode root) {
+         List<Integer> result = new LinkedList<>();
+         if(root == null) {
+             return result;
+         }
+         result.add(root.val);
+         result.addAll(preOrderTraversal(root.left));
+         result.addAll(preOrderTraversal(root.right));
          return result;
      }
-  /*  static class Solution {
-        public List<Integer> preOrderTraversal(TreeNode root) {
-            if(root == null) {
-                return null;
-            }
-            preOrderTraversal(root.left);
-            preOrderTraversal(root.right);
-            return ;
-        }
-    }
-*/
+
     public static void main(String[] args) {
-        List<Integer> result = new LinkedList<>();
-        List<Integer> ret = built(result);
-        System.out.println(ret);
+        TreeNode root = built();
+        System.out.println(preOrderTraversal(root));
 
     }
 }
