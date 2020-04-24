@@ -105,7 +105,7 @@ public class TestTree2 {
         return kLevelSize(root.left,k-1)+kLevelSize(root.right,k-1);
     }
 
-    // 求当前元素是否在二叉树里存在
+    // 判断当前元素是否在二叉树里存在
 /*
     private static Node result = null;
     private static void find(Node root, char toFInd) {
@@ -129,7 +129,7 @@ public class TestTree2 {
         if(root.val == toFind) {
             return root;
         }
-        // 如果要找的元素再左子树里，返回该结果
+        // 如果要找的元素在左子树里，返回该结果
         Node result = find(root.left,toFind);
         if(result != null) {
             return result;
