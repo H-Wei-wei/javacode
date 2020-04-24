@@ -44,12 +44,50 @@ public class TreeInterview {
         if (root.left == null && root.right == null) {
             return 1;
         }
-        // 将
+        // 左子树的深度
         int leftDepth = maxDepth(root.left);
+        // 右子树的深度
         int rightDepth = maxDepth(root.right);
         //  return 1 + (leftDepth > rightDepth ? leftDepth : rightDepth);
         return 1 + (Math.max(leftDepth, rightDepth));
     }
 
+    // 判断二叉树是否是平衡二叉树
+    public Boolean isbalanced(TreeNode root) {
+        if(root == null) {
+            return true;
+        }
+        // 判断叶子节点
+        if(root.left == null && root.right == null) {
+            return true;
+        }
+        // 左子树的深度
+        int leftDepth = maxDepth(root.left);
+        // 右子树的深度
+        int rightDepth = maxDepth(root.right);
+        // 二叉树平衡  ==>> 左右子树高度相差不大于 1 && 左子树平衡 && 右子树平衡
+        return (leftDepth - rightDepth <= 1 && leftDepth - rightDepth >= -1)
+                && isbalanced(root.left) && isbalanced(root.right);
+    }
+
+    // 对称二叉树
+    public Boolean isMymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return isMierror(root.left,root.right);
+    }
+    public Boolean isMierror(TreeNode r1,TreeNode r2) {
+        if (r1 == null && r2 == null) {
+            return true;
+        }
+        if(r1 == null || r2 == null) {
+            return false;
+        }
+        // 二叉树对称 ----》 左右子树根节点相等 && 左子树left == 右子树right
+        //                  && 左子树right== 右子树left
+        return r1.val == r2.val && isMierror(r1.left,r2.right) &&
+                isMierror(r1.right,r2.left);
+    }
 
 }
