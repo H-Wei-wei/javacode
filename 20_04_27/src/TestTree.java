@@ -40,6 +40,7 @@ public class TestTree {
 
     }
 
+    // 前序遍历
     public static void preOrderTraversal(TreeNode root) {
         if(root == null) {
             return;
@@ -57,12 +58,13 @@ public class TestTree {
             }
         }
     }
-    public static void inOrder(TreeNode root) {
+
+    // 中序遍历
+    public static void inOrderTraversal(TreeNode root) {
         if(root == null) {
             return;
         }
         Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
         TreeNode cur = root;
         while(true) {
             // 当cur不为空时，入栈，并左移cur
@@ -70,15 +72,44 @@ public class TestTree {
                 stack.push(cur);
                 cur = cur.left;
             }
-            // 当栈为空时，结束循环
+            // 访问栈顶元素并出栈，当栈为空时，结束循环
             if(stack.isEmpty()) {
                 break;
             }
-            // 出栈
-            TreeNode ret = stack.pop();
-            System.out.println(ret.val);
+            TreeNode top = stack.pop();
+            System.out.print(top.val+" ");
+            // 判断右子树
+            cur = top.right;
 
-            cur = ret.right;
+        }
+    }
+
+    // 后序遍历
+    public static void postOrderTraversal (TreeNode root){
+        if(root == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root;
+        //  prev 用来记录上一个被访问过的节点. 初始情况下没有任何节点被访问过.
+        TreeNode prev = null;
+        while(true) {
+            while(cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            if(stack.isEmpty()) {
+                break;
+            }
+            // 判断栈顶元素是否被访问过了
+            TreeNode top = stack.peek();
+            if(top.right == null || top.right == prev ) {
+                System.out.print(top.val+" ");
+                stack.pop();
+                prev = top;
+            }else {
+                cur = top.right;
+            }
 
         }
     }
@@ -86,6 +117,6 @@ public class TestTree {
     public static void main(String[] args) {
         TreeNode root = built();
         TestTree tree = new TestTree();
-        inOrder(root);
+        postOrderTraversal(root);
     }
 }
