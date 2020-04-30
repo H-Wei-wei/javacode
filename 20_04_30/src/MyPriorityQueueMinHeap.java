@@ -1,11 +1,8 @@
-import java.util.LinkedList;
-import java.util.Queue;
-
 /**
- * 优先队列
+ * 优先队列------ 小堆
  */
 
-public class MyPriorityQueue {
+public class MyPriorityQueueMinHeap {
 
     private int[] array = new int[100]; // 不考虑扩容问题
     private int size = 0; // [0,size) 为数组下标
@@ -43,8 +40,8 @@ public class MyPriorityQueue {
         int parent = (child - 1)/2;
         // 当 child 等于 0 时，就是指向根节点
         while(child > 0) {
-            // 比较当前 child 和 parent 之间的大小关系，看是否符合大堆要求
-            if(array[child] > array[parent]) {
+            // 比较当前 child 和 parent 之间的大小关系，看是否符合小堆要求
+            if(array[child] < array[parent]) {
                 int tmp = array[child];
                 array[child] = array[parent];
                 array[parent] = tmp;
@@ -61,10 +58,10 @@ public class MyPriorityQueue {
         int parent = index;
         int child = parent*2 + 1;
         while (child < size) {
-            if(child + 1 < size && array[child+1] > array[child]) {
+            if(child + 1 < size && array[child+1] < array[child]) {
                 child = child + 1;
             }
-            if(array[child] > array[parent]) {
+            if(array[child] < array[parent]) {
                 int tmp = array[child];
                 array[child] = array[parent];
                 array[parent] = tmp;
@@ -90,7 +87,7 @@ public class MyPriorityQueue {
     }
 
     public static void main(String[] args) {
-        MyPriorityQueue queue = new MyPriorityQueue();
+        MyPriorityQueueMinHeap queue = new MyPriorityQueueMinHeap();
         queue.offer(2);
         queue.offer(4);
         queue.offer(8);
