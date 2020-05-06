@@ -25,13 +25,13 @@ public class Sort2 {
                 }else {
                     break;
                 }
-                array[cur + gap] = tmp;
             }
+            array[cur + gap] = tmp;
         }
     }
 
     public static void main(String[] args) {
-        int[] array = {1,4,2,3,5,7,3};
+        int[] array = {1,4,2,7,6,3,9,8,5};
         shellSort(array);
         System.out.println(Arrays.toString(array));
     }
