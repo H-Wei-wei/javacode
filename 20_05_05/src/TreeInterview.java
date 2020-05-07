@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class TreeInterview {
     class TreeNode {
@@ -53,4 +55,41 @@ public class TreeInterview {
         return (leftDepth - rightDepth <= 1) && (leftDepth - rightDepth >= -1) &&
                 isBalanced(root.left) && isBalanced(root.right);
     }
+
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null) {
+            return true;
+        }
+        // 将 判断根节点问题转换成判断左右子树问题
+        return isMirror(root.left,root.right);
+    }
+    private boolean isMirror(TreeNode t1, TreeNode t2) {
+        if(t1 == null && t2 == null) {
+            return true;
+        }
+        if(t1 == null || t2 == null) {
+            return false;
+        }
+        return (t1.val == t2.val) && isMirror(t1.left,t2.right) && isMirror(t1.right,t2.left);
+    }
+
+    // 层序遍历
+    private void levelOrder(TreeNode root) {
+        if(root == null) {
+            return;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode cur = queue.poll();
+            System.out.print(cur.val + " ");
+            if(cur.left != null) {
+                queue.offer(cur.left);
+            }
+            if (cur.right != null) {
+                queue.offer(cur.right);
+            }
+        }
+    }
+
 }
