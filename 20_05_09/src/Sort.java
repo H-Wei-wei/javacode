@@ -7,24 +7,58 @@ import java.util.Stack;
 public class Sort {
 
     // 归并排序
-    public static void margeSort(int[] array) {
-        margeSortHelper(array,0,array.length);
+    public static void mergeSort(int[] array) {
+        mergeSortHelper(array,0,array.length);
     }
 
-    private static void margeSortHelper(int[] array, int left, int right) {
+    private static void mergeSortHelper(int[] array, int left, int right) {
         // [ 0, array.length)
         if(right - left <= 1) {
             return;
         }
         int mid = (left + right) / 2;
         // [0,mid)
-        margeSortHelper(array,left,mid);
+        mergeSortHelper(array,left,mid);
         // [mid, right)
-        margeSortHelper(array,mid,right);
-        merge(array,left, right);
+        mergeSortHelper(array,mid,right);
+        merge(array,left,mid, right);
     }
 
-    private static void merge(int[] array, int left, int right) {
+    private static void merge(int[] array, int left,int mid, int right) {
+        // [ 0, mid)
+        // [ mid, right)
+        int cur1 = left;
+        int cur2 = mid;
+        // 临时空间可以容纳 两个数组合并以后的结果
+        int[] output = new int[right - left];
+        // 当前 output 容纳了几个数据
+        int outputIndex = 0;
+        while (cur1 < mid && cur2 < right) {
+            if(array[cur1] <= array[cur2]) {
+                output[outputIndex] = array[cur1];
+                cur1++;
+                outputIndex++;
+            }else {
+                output[outputIndex] = array[cur2];
+                cur2++;
+                outputIndex++;
+            }
+        }
+        while(cur1 < mid) {
+            output[outputIndex] = array[cur1];
+            cur1++;
+            outputIndex++;
+        }
+        while(cur2 < right) {
+            output[outputIndex] = array[cur2];
+            cur2++;
+            outputIndex++;
+        }
+        // 再将临时空间中的数据拷贝到原数组中
+        for(int i = 0; i < right-left; i++) {
+            array[left + i] = output[i];
+        }
+
     }
 
     // 快速排序
@@ -100,7 +134,8 @@ public class Sort {
         System.out.println(Arrays.toString(array));*/
 
         int[] array = {3,5,8,2,9,7,6,1,4};
-        quickSortByLoop(array);
+        //quickSortByLoop(array);
+        mergeSort(array);
         System.out.println(Arrays.toString(array));
     }
 }

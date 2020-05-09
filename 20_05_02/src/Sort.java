@@ -5,7 +5,7 @@ import java.util.Arrays;
  */
 
 public class Sort {
-    public static void interSort(int[] array) {
+    public static void insertSort(int[] array) {
         // bound 表示要排序的元素的位置
         for(int bound = 1; bound < array.length; bound++) {
             // 将 count 位置元素存到一个内存中
@@ -28,7 +28,7 @@ public class Sort {
 
     public static void main(String[] args) {
         int[] array = {1,4,2,7,6,3,9,8,5};
-        interSort(array);
+        insertSort(array);
         System.out.println(Arrays.toString(array));
     }
 }
