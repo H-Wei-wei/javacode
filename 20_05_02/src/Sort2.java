@@ -7,12 +7,12 @@ import java.util.Arrays;
 public class Sort2 {
     public static void shellSort(int[] array) {
         int gap = array.length/2;
-        while(gap > 1) {
+        while(gap >= 1) {
             insertSortGap(array,gap);
             gap = gap/2;
         }
         // 当 gap = 1 时，进行一次插排
-        insertSortGap(array,1);
+        //insertSortGap(array,1);
     }
 
     private static void insertSortGap(int[] array, int gap) {

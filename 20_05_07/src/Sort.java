@@ -127,10 +127,10 @@ public class Sort {
 
     public static void main(String[] args) {
         int[] array ={1,3,6,4,5,8,9,7,2};
-        //selectSort(array);
+        selectSort(array);
         //heapSort(array);
         //bubbleSort(array);
-        quickSort(array);
+        //quickSort(array);
         System.out.println(Arrays.toString(array));
     }
 }
