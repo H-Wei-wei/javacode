@@ -21,11 +21,11 @@ public class SevenSort {
     public static void shellSort(int[] array) {
         int gap = array.length / 2;
         while (gap >= 1) {
-            selectSortGap(array,gap);
+            insertSortGap(array,gap);
             gap = gap / 2;
         }
     }
-    private static void selectSortGap(int[] array, int gap) {
+    private static void insertSortGap(int[] array, int gap) {
         for(int bound = gap; bound < array.length; bound++) {
             int tmp = array[bound];
             int cur = bound - gap;
