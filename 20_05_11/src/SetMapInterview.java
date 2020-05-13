@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 只出现一次的数据
@@ -113,6 +110,40 @@ public class SetMapInterview {
         }
         return count;
 
+    }
+
+    // 前 k 个高频单词
+    public List<String> topKFrequent(String[] words, int k) {
+        // 1.统计每个单词出现的次数
+        Map<String,Integer> map = new HashMap<>();
+        for (String x: words) {
+            map.put(x,map.getOrDefault(x,0) + 1);
+/*            Integer count = map.get(x);
+            if (count == null) {
+                map.put(x,1);
+            }else {
+                map.put(x,count + 1);
+            }
+
+*/          }
+            // 2.去重
+            List<String> list = new ArrayList<>(map.keySet());
+            // 3.根据单词出现的次数 来对 list 排序，如果次数相等，就按字典序排序
+            Collections.sort(list, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    // 匿名内部类 可以访问到上边的 map 变量
+                    // 变量捕获
+                    int count1 = map.get(o1);
+                    int count2 = map.get(o2);
+                    if (count1 == count2) {
+                        return o1.compareTo(o2);
+                    }
+                    return count2 - count1;
+                }
+            });
+            // 根据 K 这个元素，取出前 K 个值
+            return list.subList(0,k);
     }
 
     public static void main(String[] args) {
