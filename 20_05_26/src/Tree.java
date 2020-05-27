@@ -18,9 +18,9 @@ public class Tree {
         queue.offer(pRoot);
         while (!queue.isEmpty()) {
             int count = queue.size();
-            TreeNode cur = queue.poll();
             ArrayList<Integer> list = new ArrayList<>();
-            for (; count > 0; count--) {
+            while (count > 0) {
+                TreeNode cur = queue.poll();
                 list.add(cur.val);
                 if (cur.left != null) {
                     queue.offer(cur.left);
@@ -28,9 +28,9 @@ public class Tree {
                 if(cur.right != null) {
                     queue.offer(cur.right);
                 }
+                count--;
             }
             result.add(list);
-            System.out.println();
         }
         return result;
     }
