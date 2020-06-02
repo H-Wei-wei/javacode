@@ -21,7 +21,7 @@ public class TestJDBC {
         // connection 对象生命周期是比较短的，每个请求创建一个新的 connection 对象
         Connection connection = dataSource.getConnection();
 
-        // 3、拼装 SQL 语句，用到 PrepareStatement
+        // 3、拼装 SQL 语句，用 PrepareStatement
         // 先插入数据为例
         int id = 1;
         String name = "caocao";
