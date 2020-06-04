@@ -1,6 +1,4 @@
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Test {
     public static void main(String[] args) {
@@ -12,16 +10,23 @@ public class Test {
         }
     }
 
-    private static Set func(String s1, String s2) {
-        Set<Character> set = new HashSet<>();
+    private static String func(String s1, String s2) {
+        String ret = "";
+        boolean flg = false;   // 标志位
         for (int i = 0; i < s1.length(); i++) {
+            char tmp = s1.charAt(i);
+            flg = false;
             for (int j = 0; j < s2.length(); j++) {
-                if (s1.charAt(i) == s2.charAt(j)) {
+                if (tmp ==  s2.charAt(j)) {
+                    flg = true;
                     break;
                 }
-                set.add(s1.charAt(i));
             }
+            if (flg) {
+                continue;
+            }
+            ret = ret + tmp;
         }
-        return set;
+        return ret;
     }
 }
