@@ -5,7 +5,7 @@ public class Main4 {
         while (sc.hasNext()) {
             long x_0 = sc.nextInt();
             int  count = 0;
-            while (x_0 != 0 && count <= 300_00) {
+            while (x_0 != 0 && count <= 300000) {
                 x_0 = ((x_0 << 1) + 1) % 1000000007;
                 count++;
             }
