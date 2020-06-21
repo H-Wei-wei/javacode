@@ -16,18 +16,14 @@ public class Main2 {
         if (root == null) {
             return;
         }
-        MirrorHelper(root.left, root.right);
-    }
-
-    private void MirrorHelper(TreeNode root1, TreeNode root2) {
-        if (root1 == null || root2 == null) {
+        if (root.left == null && root.right == null) {
             return;
         }
-        int tmp = root1.val;
-        root1.val = root2.val;
-        root2.val = tmp;
-        MirrorHelper(root1.left, root2.right);
-        MirrorHelper(root1.right, root2.right);
+        TreeNode node = root.left;
+        root.left = root.right;
+        root.right = node;
+        Mirror(root.left);
+        Mirror(root.right);
     }
 
 }
