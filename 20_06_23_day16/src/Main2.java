@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.LinkedList;
 
 class ListNode {
     int val;
@@ -8,28 +10,38 @@ class ListNode {
     }
 }
 public class Main2 {
-    public ListNode partition(ListNode pHead, int x) {
+    public static ListNode partition(ListNode pHead, int x) {
         ListNode node = new ListNode(x);
-        ListNode cur = pHead;
-        ListNode prev = null;
+        ListNode head = node;
+        ListNode tail = node;
+        ListNode prev = node;
         if (pHead == null) {
             return node;
         }
-        while (cur != null) {
-            if (x <=cur.val) {
-                node.next = pHead;
-                pHead = node;
+        ListNode cur = pHead;
+        ListNode curNext = pHead.next;
+        while (true) {
+            if (cur.val < x) {
+               cur.next = node;
+               if (prev == node) {
+                   head = cur;
+               }else {
+                  prev.next = cur;
+               }
                 prev = cur;
-                cur = cur.next;
             }else {
-                prev.next = cur.next;
-                cur.next = pHead;
-                pHead = cur;
-                cur = prev.next;
-                
+                tail.next = cur;
+                tail = cur;
+                tail.next = null;
             }
-
+            cur = curNext;
+            if (cur.next == null) {
+                break;
+            }
+            curNext = curNext.next;
         }
-
+        prev.next = node.next;
+        return head;
     }
+
 }
