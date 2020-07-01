@@ -88,7 +88,6 @@ public class Main2 {
             case 10: s2 = "拾";break;
             case 11: s2 = "佰";break;
             case 12: s2 = "仟";break;
-
         }
 
         switch (Integer.valueOf(s)){
