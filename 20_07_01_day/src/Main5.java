@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main5 {
     public static void main(String[] args) {
@@ -8,7 +8,7 @@ public class Main5 {
             String str = sc.next();
             getNum(str);
             // 十进制数 --》IP地址
-            long n = sc.nextInt();
+            long n = Long.valueOf(sc.nextLine());
             getIP(n);
         }
     }
@@ -25,8 +25,8 @@ public class Main5 {
             }
             sb.append(sb1.reverse());
         }
-       //System.out.println(sb);// 得到二进制 sb
-        long sum = 0;
+        //System.out.println(sb);// 得到二进制 sb
+        int sum = 0;
         for (int i = 0; i < sb.length(); i++) {
             int n = sb.charAt(i) - '0'; //由字符得到数字
             sum += n * Math.pow(2, sb.length() - 1 - i);
@@ -83,3 +83,49 @@ public class Main5 {
         System.out.println(ret);
     }
 }
+
+/*
+*
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            String strIp = sc.nextLine();
+            long numIp = Long.valueOf(sc.nextLine());
+            System.out.println(ipToNum(strIp));
+            System.out.println(numToIp(numIp));
+        }
+    }
+
+    public static long ipToNum(String str){
+        String[] strlist = str.split("\\.");
+        StringBuilder sbAll = new StringBuilder();
+        for(int i=0;i<strlist.length;i++){
+            StringBuilder sb = new StringBuilder();
+            sb.append(Long.toBinaryString(Long.valueOf(strlist[i])));
+            while(sb.length()<8){
+                sb.insert(0, 0);
+            }
+            sbAll.append(sb);
+        }
+        return Long.valueOf(sbAll.toString(), 2);
+    }
+
+    public static String numToIp(long n){
+        StringBuilder sb = new StringBuilder();
+        StringBuilder numSb = new StringBuilder();
+        sb.append(Long.toBinaryString(n));
+        while(sb.length()<32){
+            sb.insert(0, 0);
+        }
+        for(int i=0;i<4;i++){
+            String temp = sb.substring(i*8, i*8+8);
+            numSb.append(Long.valueOf(temp, 2));
+            numSb.append(".");
+        }
+        numSb.deleteCharAt(numSb.length()-1);
+        return numSb.toString();
+    }
+}
+* */
