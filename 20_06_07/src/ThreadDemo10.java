@@ -4,7 +4,7 @@ public class ThreadDemo10 {
         int count = 0;
 
         // 加锁，调用该方法时，加锁，方法结束时释放锁
-        synchronized public void increase() {
+         synchronized public void increase() {
             count++;
         }
     }
