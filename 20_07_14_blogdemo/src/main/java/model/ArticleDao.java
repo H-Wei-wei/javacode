@@ -98,7 +98,7 @@ public class ArticleDao {
     }
 
     // 删除指定文章
-    public void delete(int articleId) {
+    public void deleteBy(int articleId) {
         // 1、建立连接
         Connection connection = DBUtil.getConnection();
         // 2、拼装 SQL
@@ -124,10 +124,16 @@ public class ArticleDao {
     public static void main(String[] args) {
         ArticleDao articleDao = new ArticleDao();
         // 1.测试插入文章
-        Article article = new Article();
-        article.setTitle("1");
-        article.setContent("我是正文我是正文我是正文我是正文我是正文我是正文我是正文我是正文我是正文我是正文");
-        article.setUserId(1);
-        articleDao.add(article);
+//        Article article = new Article();
+//        article.setTitle("w2");
+//        article.setContent("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+//        article.setUserId(1);
+//        articleDao.add(article);
+        // 2.测试查看文章列表
+//        System.out.println(articleDao.selectALL());
+        // 3.测试查看指定文章
+//        System.out.println(articleDao.selectById(2));
+        // 4.删除指定文章
+        articleDao.deleteBy(2);
     }
 }
