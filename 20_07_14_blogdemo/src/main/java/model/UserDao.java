@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class UserDao {
     // 新增用户
-    void addUser(User user) {
+    public void addUser(User user) {
         // 1.建立连接
         Connection connection = DBUtil.getConnection();
         // 2.拼装 SQL 语句
@@ -33,7 +33,7 @@ public class UserDao {
     }
 
     // 查找用户(登录)
-    User selectByName (String name) {
+    public User selectByName(String name) {
         // 1.建立连接
         Connection connection = DBUtil.getConnection();
         // 2.拼装 SQL 语句
@@ -63,15 +63,15 @@ public class UserDao {
         return null;
     }
 
-    public static void main(String[] args) {
-        UserDao userDao = new UserDao();
-       // 1.测试增加用户
-//        User user = new User();
-//        user.setName("ww");
-//        user.setPassword("1212");
-//        userDao.addUser(user);
-        // 2.测试查看用户
-//        User user = userDao.selectByName("ww");
-//        System.out.println(user);
-    }
+//    public static void main(String[] args) {
+//        UserDao userDao = new UserDao();
+//       // 1.测试增加用户
+////        User user = new User();
+////        user.setName("ww");
+////        user.setPassword("1212");
+////        userDao.addUser(user);
+//        // 2.测试查看用户
+////        User user = userDao.selectByName("ww");
+////        System.out.println(user);
+//    }
 }
