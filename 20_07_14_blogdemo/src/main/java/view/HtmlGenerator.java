@@ -47,19 +47,40 @@ public class HtmlGenerator {
         stringBuilder.append("<head>");
         stringBuilder.append("<meta charset=\"utf-8\">");
         stringBuilder.append("<title>提示页面</title>");
+        stringBuilder.append("<style>");
+        // 标签内写 CSS 的逻辑
+        stringBuilder.append("a {" +
+                "color: #333;"+
+                "text-decoration: none;"+
+                "}");
+        stringBuilder.append("a:hover {" +
+                "color: white;" +
+                "background-color: orange;" +
+                "}");
+        stringBuilder.append("body {" +
+                "background-image: url(\"https://www.2008php.com/2011_Website_appreciate/2011-09-26/20110926182827.jpg\");" +
+                "background-repeat:none;"+
+                "background-position:0 center;"+
+                "}");
+        stringBuilder.append("</style>");
         stringBuilder.append("</head>");
-
         stringBuilder.append("<body>");
-        stringBuilder.append("<div> 欢迎你" + user.getName());
+        stringBuilder.append("<h3> 欢迎你" + user.getName() + "</h3>");
+        stringBuilder.append("<hr>");
         // 要有一个文章列表，显示每个文章的标题
         for (Article article: articles) {
-            stringBuilder.append(String.format("<div> <a href=\"article?articleId=%d\"> %s </a> </div>",
+            stringBuilder.append(String.format("<div style=\"width:200px; height:50px; line-height:50px\"> <a href=\"article?articleId=%d\"> %s </a> </div>",
                     article.getArticleId(), article.getTitle()));
         }
+        stringBuilder.append(String.format("<hr>"));
         stringBuilder.append(String.format("<div> 当前共有博客 %d 篇</div>", articles.size()));
 
         stringBuilder.append("</body>");
         stringBuilder.append("</html>");
         return stringBuilder.toString();
+    }
+
+    public static String getArticleDetailPage(Article article, User user) {
+
     }
 }

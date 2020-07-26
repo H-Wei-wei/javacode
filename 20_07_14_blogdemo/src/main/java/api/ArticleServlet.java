@@ -33,11 +33,23 @@ public class ArticleServlet extends HttpServlet {
             getAllArticle(user, resp);
         }else {
             // b:有这个参数就去执行获取文章详情操作
-            getOneArticle();
+            getOneArticle(Integer.parseInt(articleIdStr), user,resp);
         }
     }
 
-    private void getOneArticle() {
+    private void getOneArticle(int articleId, User user, HttpServletResponse resp) throws IOException {
+        // 1.查找数据库
+        ArticleDao articleDao = new ArticleDao();
+        Article article = articleDao.selectById(articleId);
+        if (article == null) {
+            // 文章未找到
+            String html = HtmlGenerator.getMessagePage("文章未找到","article");
+            resp.getWriter().write(html);
+            return;
+        }
+        // 2、构造页面
+        String html = HtmlGenerator.getArticleDetailPage(article,user);
+        resp.getWriter().write(html);
     }
 
     private void getAllArticle(User user, HttpServletResponse resp) throws IOException {
