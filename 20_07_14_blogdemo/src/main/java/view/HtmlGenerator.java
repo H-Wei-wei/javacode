@@ -74,13 +74,56 @@ public class HtmlGenerator {
         }
         stringBuilder.append(String.format("<hr>"));
         stringBuilder.append(String.format("<div> 当前共有博客 %d 篇</div>", articles.size()));
+        stringBuilder.append("<br>");
 
+        //新增发布文章的区域
+        stringBuilder.append("<div> 发布文章</div>");
+        stringBuilder.append("<from method=\"POST\" action= \"article\">");
+        stringBuilder.append("<input type=\"text\" name=\"title\" placeholder=\"请输入标题\">");
+        stringBuilder.append("<br>");
+        stringBuilder.append("<textarea name=\"content\" style=\"width: 500px; height=300px;\"></textarea>");
+        stringBuilder.append("<br>");
+        stringBuilder.append("<input type=\"submit\" value=\"发布文章\">");
+        stringBuilder.append("</from>");
         stringBuilder.append("</body>");
         stringBuilder.append("</html>");
         return stringBuilder.toString();
     }
 
-    public static String getArticleDetailPage(Article article, User user) {
+    public static String getArticleDetailPage(Article article, User user, User author) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("<html>");
 
+        stringBuilder.append("<head>");
+        stringBuilder.append("<meta charset=\"utf-8\">");
+        stringBuilder.append("<title>提示页面</title>");
+        stringBuilder.append("<style>");
+        // 标签内写 CSS 的逻辑
+        stringBuilder.append("a {" +
+                "color: #333;"+
+                "text-decoration: none;"+
+                "}");
+        stringBuilder.append("a:hover {" +
+                "color: white;" +
+                "background-color: orange;" +
+                "}");
+        stringBuilder.append("body {" +
+                "background-image: url(\"https://www.2008php.com/2011_Website_appreciate/2011-09-26/20110926182827.jpg\");" +
+                "background-repeat:none;"+
+                "background-position:0 center;"+
+                "}");
+        stringBuilder.append("</style>");
+        stringBuilder.append("</head>");
+        stringBuilder.append("<body>");
+        stringBuilder.append("<h3> 欢迎你" + user.getName() + "</h3>");
+        stringBuilder.append("<hr>");
+
+        stringBuilder.append(String.format("<h1>%s</h1>", article.getTitle()));
+        stringBuilder.append(String.format("<h4>作者：%s</h4>", author.getName()));
+        stringBuilder.append(String.format("<div>%s</div>", article.getContent()));
+
+        stringBuilder.append("</body>");
+        stringBuilder.append("</html>");
+        return stringBuilder.toString();
     }
 }

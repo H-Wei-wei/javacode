@@ -3,6 +3,7 @@ package api;
 import model.Article;
 import model.ArticleDao;
 import model.User;
+import model.UserDao;
 import view.HtmlGenerator;
 
 import javax.servlet.ServletException;
@@ -47,8 +48,11 @@ public class ArticleServlet extends HttpServlet {
             resp.getWriter().write(html);
             return;
         }
-        // 2、构造页面
-        String html = HtmlGenerator.getArticleDetailPage(article,user);
+        // 2.根据文章获得作者 id 找到作者信息，进一步得到作者姓名
+        UserDao userDao = new UserDao();
+        User author = userDao.selectById(article.getUserId());
+        // 3、构造页面
+        String html = HtmlGenerator.getArticleDetailPage(article,user, author);
         resp.getWriter().write(html);
     }
 
@@ -59,5 +63,17 @@ public class ArticleServlet extends HttpServlet {
         // 2.构造页面
         String html = HtmlGenerator.getArticleListPage(articles, user);
         resp.getWriter().write(html);
+    }
+
+    // 实现新增文章
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        resp.setContentType("text/html; charset=utf-8");
+        // 1.判断用户的登陆情况
+
+        // 2.从请求中读取到浏览器提交的数据（title ，content），并进行简单的校验
+        // 3.把数据插入到数据库中
+        // 4.返回一个文章发布成功页面
     }
 }
