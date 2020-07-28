@@ -134,6 +134,6 @@ public class ArticleDao {
         // 3.测试查看指定文章
 //        System.out.println(articleDao.selectById(2));
         // 4.删除指定文章
-        articleDao.deleteBy(2);
+//        articleDao.deleteBy(2);
     }
 }

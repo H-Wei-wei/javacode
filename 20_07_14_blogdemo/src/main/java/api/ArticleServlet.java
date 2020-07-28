@@ -71,9 +71,36 @@ public class ArticleServlet extends HttpServlet {
         req.setCharacterEncoding("utf-8");
         resp.setContentType("text/html; charset=utf-8");
         // 1.判断用户的登陆情况
-
+        HttpSession httpSession = req.getSession(false);
+        if (httpSession == null) {
+            // 未登录
+            String html = HtmlGenerator.getMessagePage("用户未登录",
+                    "login.html");
+            resp.getWriter().write(html);
+            return;
+        }
+        //已登录,就根据 session 得到 User 信息
+        User user = (User) httpSession.getAttribute("user");
         // 2.从请求中读取到浏览器提交的数据（title ，content），并进行简单的校验
+        String title = req.getParameter("title");
+        String content = req.getParameter("content");
+        if (title == null || "".equals(title)
+            || content == null || "".equals(content)) {
+            String html = HtmlGenerator.getMessagePage("你提交的标题或内容为空",
+                    "article");
+            resp.getWriter().write(html);
+            return;
+        }
         // 3.把数据插入到数据库中
+        ArticleDao articleDao = new ArticleDao();
+        Article article = new Article();
+        article.setTitle(title);
+        article.setContent(content);
+        article.setUserId(user.getUserId());
+        articleDao.add(article);
         // 4.返回一个文章发布成功页面
+        String html = HtmlGenerator.getMessagePage("发布成功","article");
+        resp.getWriter().write(html);
+        return;
     }
 }

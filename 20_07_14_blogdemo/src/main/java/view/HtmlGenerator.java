@@ -78,13 +78,13 @@ public class HtmlGenerator {
 
         //新增发布文章的区域
         stringBuilder.append("<div> 发布文章</div>");
-        stringBuilder.append("<from method=\"POST\" action= \"article\">");
-        stringBuilder.append("<input type=\"text\" name=\"title\" placeholder=\"请输入标题\">");
+        stringBuilder.append("<form method=\"POST\" action= \"article\">");
+        stringBuilder.append("<input type=\"text\"  style=\"margin-bottom=5px\" name=\"title\" placeholder=\"请输入标题\">");
         stringBuilder.append("<br>");
-        stringBuilder.append("<textarea name=\"content\" style=\"width: 500px; height=300px;\"></textarea>");
+        stringBuilder.append("<textarea name=\"content\" style=\"width: 500px; height=300px; margin-bottom=5px\"></textarea>");
         stringBuilder.append("<br>");
         stringBuilder.append("<input type=\"submit\" value=\"发布文章\">");
-        stringBuilder.append("</from>");
+        stringBuilder.append("</form>");
         stringBuilder.append("</body>");
         stringBuilder.append("</html>");
         return stringBuilder.toString();
@@ -120,7 +120,7 @@ public class HtmlGenerator {
 
         stringBuilder.append(String.format("<h1>%s</h1>", article.getTitle()));
         stringBuilder.append(String.format("<h4>作者：%s</h4>", author.getName()));
-        stringBuilder.append(String.format("<div>%s</div>", article.getContent()));
+        stringBuilder.append(String.format("<div>%s</div>", article.getContent().replace("\n", "<br>")));
 
         stringBuilder.append("</body>");
         stringBuilder.append("</html>");
