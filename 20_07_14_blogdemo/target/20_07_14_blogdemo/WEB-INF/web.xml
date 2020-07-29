@@ -33,4 +33,13 @@
     <url-pattern>/article</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>DeleteArticleServlet</servlet-name>
+    <servlet-class>api.DeleteArticleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteArticleServlet</servlet-name>
+    <url-pattern>/deleteArticle</url-pattern>
+  </servlet-mapping>
+
 </web-app>

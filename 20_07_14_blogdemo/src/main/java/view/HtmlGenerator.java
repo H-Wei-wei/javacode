@@ -49,11 +49,11 @@ public class HtmlGenerator {
         stringBuilder.append("<title>提示页面</title>");
         stringBuilder.append("<style>");
         // 标签内写 CSS 的逻辑
-        stringBuilder.append("a {" +
+        stringBuilder.append(".article {" +
                 "color: #333;"+
                 "text-decoration: none;"+
                 "}");
-        stringBuilder.append("a:hover {" +
+        stringBuilder.append(".article :hover {" +
                 "color: white;" +
                 "background-color: orange;" +
                 "}");
@@ -69,8 +69,9 @@ public class HtmlGenerator {
         stringBuilder.append("<hr>");
         // 要有一个文章列表，显示每个文章的标题
         for (Article article: articles) {
-            stringBuilder.append(String.format("<div style=\"width:200px; height:50px; line-height:50px\"> <a href=\"article?articleId=%d\"> %s </a> </div>",
-                    article.getArticleId(), article.getTitle()));
+            stringBuilder.append(String.format("<div style=\"width:200px; height:50px; line-height:50px\"> <a class=\"article\" href=\"article?articleId=%d\"> %s </a> " +
+                            "<a href=\"deleteArticle?articleId=%d\">删除</a></div>",
+                    article.getArticleId(), article.getTitle(), article.getArticleId()));
         }
         stringBuilder.append(String.format("<hr>"));
         stringBuilder.append(String.format("<div> 当前共有博客 %d 篇</div>", articles.size()));
