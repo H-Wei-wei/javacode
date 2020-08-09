@@ -8,7 +8,7 @@ public class Order {
     private int userId;
     private Timestamp time;
     private int isDone;
-    private List<Dish> dishes;
+    private List<Dish> dishes;  // 一个订单包含的多个菜品
 
     public int getOrderId() {
         return orderId;

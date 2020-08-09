@@ -92,14 +92,14 @@ public class UserDao {
     }
 
     public static void main(String[] args) throws OrderSystemException {
-        UserDao userDao = new UserDao();
+//        UserDao userDao = new UserDao();
 //        User user = new User();
-//        user.setName("WeiWei");
-//        user.setPassword("1212");
+//        user.setName("微微");
+//        user.setPassword("2222");
 //        user.setIsAdmin(0);
 //        userDao.addUser(user);
-
-        System.out.println(userDao.selectByName("WeiWei"));
-        System.out.println(userDao.selectById(1));
+//
+//        System.out.println(userDao.selectByName("WeiWei"));
+//        System.out.println(userDao.selectById(2));
     }
 }
