@@ -17,6 +17,7 @@ import java.util.List;
 public class ArticleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
         resp.setContentType("text/html; charset=utf-8");
         // 1.验证用户是否已经登录，如果没有登录，就提示要先登录
         HttpSession httpSession = req.getSession(false);

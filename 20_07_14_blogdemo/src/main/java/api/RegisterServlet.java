@@ -14,6 +14,7 @@ public class RegisterServlet extends HttpServlet {
     // 浏览器是通过 POST 方法提交注册信息给服务器的
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
         resp.setContentType("text/html; charset=utf-8");
         // 1.获取到前端提交的数据（用户名、密码），校验是否正确
         String name = req.getParameter("name");

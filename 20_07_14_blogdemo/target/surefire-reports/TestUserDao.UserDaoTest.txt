@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: TestUserDao.UserDaoTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 2.998 s <<< FAILURE! - in TestUserDao.UserDaoTest
+selectById(TestUserDao.UserDaoTest)  Time elapsed: 1.806 s  <<< ERROR!
+java.lang.NullPointerException
+	at TestUserDao.UserDaoTest.selectById(UserDaoTest.java:31)
+
+addUser(TestUserDao.UserDaoTest)  Time elapsed: 0.667 s  <<< ERROR!
+java.lang.NullPointerException
+	at TestUserDao.UserDaoTest.addUser(UserDaoTest.java:17)
+
+selectByName(TestUserDao.UserDaoTest)  Time elapsed: 0.333 s  <<< ERROR!
+java.lang.NullPointerException
+	at TestUserDao.UserDaoTest.selectByName(UserDaoTest.java:24)
+

@@ -14,6 +14,7 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
         resp.setContentType("text/html; charset=utf-8");
         // 1.获取到用户名和密码，并进行简单的校验
         String name = req.getParameter("name");
