@@ -1,6 +1,6 @@
 package dao;
 
-import exception.OrderSystemException;
+import assist.OrderSystemException;
 import modal.DBUtil;
 import modal.User;
 

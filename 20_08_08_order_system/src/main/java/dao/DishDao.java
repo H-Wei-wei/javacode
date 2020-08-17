@@ -5,7 +5,7 @@ package dao;
 // 3.查询所有菜品
 // 4.查寻指定菜品
 
-import exception.OrderSystemException;
+import assist.OrderSystemException;
 import modal.DBUtil;
 import modal.Dish;
 
