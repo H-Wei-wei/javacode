@@ -10,10 +10,11 @@ import java.sql.SQLException;
 
 public class UserDao {
     /**
+     * 登录
      * 依据用户名查询，如果找不到，返回null,
      * 否则返回一个User对象（包含了用户的所有信息）
      */
-    public static User login(User loginUser) {
+    public User login(User loginUser) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -45,7 +46,7 @@ public class UserDao {
     /**
      * 注册
      */
-    public static void insertUser(User user) {
+    public int insertUser(User user) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -58,12 +59,16 @@ public class UserDao {
             statement.setInt(3, user.getAge());
             statement.setString(4, user.getGender());
             statement.setString(5, user.getEmail());
-            statement.executeUpdate(); // 运行
+            int ret = statement.executeUpdate(); // 运行
+            if (ret == 1) {
+                return 1;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
             DBUtil.close(connection, statement, resultSet);
         }
+        return 0;
     }
 
 //    public static void main(String[] args) {
