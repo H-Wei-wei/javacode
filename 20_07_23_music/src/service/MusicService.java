@@ -33,7 +33,7 @@ public class MusicService {
     public int deleteMusicById(int id) {
         MusicDao musicDao = new MusicDao();
         if (musicDao.deleteMusicById(id) == 1) {
-            if (musicDao.findLoveMusicById(id)) {
+            if (musicDao.findLoveMusicByMusicId(id)) {
                 int ret = musicDao.removeLoveMusicById(id);
                 if (ret == 1) {
                     return 1;

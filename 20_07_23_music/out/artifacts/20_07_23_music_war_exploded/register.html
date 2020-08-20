@@ -23,14 +23,17 @@
         }
     </style>
     <script>
-        //登录请求
+        //注册请求
         $(function () {
             $("#submit").click(function () {
                 var username=$("#user").val();
                 var password=$("#password").val();
+                var age=$("#age").val();
+                var gender=$("#gender").val();
+                var email=$("#email").val();
                 $.ajax({
                     url:"/registerServlet",
-                    data:{"username":username,"password":password},
+                    data:{"username":username,"password":password, "age":age, "gender":gender, "email":email},
                     type:"POST",
                     dataType:"json",
                     success:function (data) {
@@ -39,7 +42,7 @@
                             window.location.href="login.html";
                         }else{
                             /*window.location.reload();*/
-                            $("#message").text("账号或密码错误，请重试!");
+                            $("#message").text("注册失败，请重新注册!");
                             $("#user").val("");
                             $("#password").val("");
                             $("#verifycode").val("");
@@ -67,6 +70,11 @@
     <div class="form-group">
         <label for="password">年龄：</label>
         <input type="text" name="age" class="form-control" id="age" placeholder="请输入年龄"/>
+    </div>
+
+    <div class="form-group">
+        <label for="password">性别：</label>
+        <input type="text" name="gender" class="form-control" id="gender" placeholder="请输入性别"/>
     </div>
 
     <div class="form-group">

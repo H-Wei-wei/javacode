@@ -31,9 +31,11 @@ public class LoginServlet extends HttpServlet {
         // 3.登录用户
         UserService userService = new UserService();
         User user = userService.login(loginUser);
+
         if (user != null) {
             System.out.println("登录成功");
             return_map.put("msg", true);
+            req.getSession(true).setAttribute("user",user);
         }else {
             System.out.println("登录失败");
             return_map.put("msg", false);

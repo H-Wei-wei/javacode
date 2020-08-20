@@ -41,7 +41,7 @@ public class MusicDao {
      * @param id
      * @return
      */
-    public  Music findMusicById(int id){
+    public Music findMusicById(int id){
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -174,7 +174,7 @@ public class MusicDao {
         return 0;
     }
 
-    public   boolean findLoveMusicById(int id) {
+    public boolean findLoveMusicByMusicId(int id) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;

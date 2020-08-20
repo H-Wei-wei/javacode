@@ -23,14 +23,29 @@ public class RegisterServlet extends HttpServlet {
         // 1.读取请求中的数据
         String userName = req.getParameter("username");
         String password = req.getParameter("password");
+        String ageStr = req.getParameter("age");
+        String gender = req.getParameter("gender");
+        String email = req.getParameter("email");
         // 2.根据输入构造 User 对象
         User registerUser = new User();
         registerUser.setUsername(userName);
         registerUser.setPassword(password);
-        // 3.注册用户
+        int age = Integer.parseInt(ageStr);
+        registerUser.setAge(age);
+        registerUser.setGender(gender);
+        registerUser.setEmail(email);
+
+        // System.out.println(registerUser);
         UserService userService = new UserService();
-        userService.register(registerUser);
-        return_map.put("msg", true);
+        int ret = userService.register(registerUser);
+        // 3.注册用户
+        if(ret == 1) {
+            System.out.println("注册成功");
+            return_map.put("msg", true);
+        }else {
+            System.out.println("注册失败");
+            return_map.put("msg",false);
+        }
         // 4.构造响应数据
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(resp.getWriter(), return_map);

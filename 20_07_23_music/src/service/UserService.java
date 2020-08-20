@@ -12,14 +12,23 @@ public class UserService {
     }
 
     // 注册
-    public void register (User user) {
+    public int register (User user) {
         UserDao userDao = new UserDao();
         int ret = userDao.insertUser(user);
         if (ret == 1) {
-            System.out.println("注册成功");
+            return 1;
         }else {
-            System.out.println("注册失败");
+            return 0;
         }
     }
+
+//    public static void main(String[] args) {
+//        UserService userService = new UserService();
+//        User user = new User();
+//        user.setAge(10);
+//        user.setGender("女");
+//        user.setEmail("2345678901@qq.com");
+//        userService.register(user);
+//    }
 }
 
