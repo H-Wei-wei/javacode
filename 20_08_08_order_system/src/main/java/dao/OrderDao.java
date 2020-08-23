@@ -24,85 +24,92 @@ public class OrderDao {
     // 第一个表 order_user
     // 第二个表 order_dish
     public void add(Order order) throws OrderSystemException {
-        // 1.order_user 表插入
+        // 1. 先操作 order_user 表
         addOrderUser(order);
-        // 2.order_dish 表插入
-        //     order 中 orderId 是不知道的，是由数据库自主生成的
-        //     可以在上个方法中获取到 id 插入到 orderId 中
+        // 2. 再操作 order_dish 表
+        //    执行 add 方法的时候, order 对象中的 orderId 字段还是空着的呢~~
+        //    这个字段要交给数据库, 由自增主键来决定.
         addOrderDish(order);
-        // 如果第一个表插入订单成功，第二个表失败，整体就不算插入成功
-        // 1.可以通过 事务来解决
-        // 2.也可以在第二次执行失败时将 addOrderUser 中此次执行插入的记录删掉
     }
 
     private void addOrderUser(Order order) throws OrderSystemException {
-        Connection connection = null;
+        // 1. 先获取到数据库连接
+        Connection connection = DBUtil.getConnection();
+        // 2. 构造 SQL
+        String sql = "insert into order_user values(null, ?, now(), 0)";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            connection = DBUtil.getConnection();
-            String sql = "insert into order_user values(null, ?,now(), 0)";
-            // 在预编译的后，通过 PreparedStatement.RETURN_GENERATED_KEYS 可以获取到自增主键的值
+            // 加上 RETURN_GENERATED_KEYS 选项, 插入的同时就会把数据库自动生成的自增主键的值获取到
             statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setInt(1, order.getUserId());
+            // 3. 执行 SQL
             int ret = statement.executeUpdate();
             if (ret != 1) {
-                throw new OrderSystemException("新增订单失败");
+                throw new OrderSystemException("插入订单失败");
             }
-            // 把自增主键的值给读取出来
+            // 把自增主键的值给读取出来.
             resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
-                // 理解参数1
-                // 由于一个表中的自增列可以有多个，返回的时候都返回来了
-                // 1 表示获取到第一个自增列生成的值
+                // 理解参数 1. 读取 resultSet 的结果时, 可以使用列名, 也可以使用下标.
+                // 由于一个表中的自增列可以有多个. 返回的时候都返回回来了. 下标填成 1
+                // 就表示想获取到第一个自增列生成的值.
                 order.setOrderId(resultSet.getInt(1));
             }
-            System.out.println("新增订单成功");
+            System.out.println("插入订单第一步成功");
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new OrderSystemException("新增订单失败");
-        }finally {
-            DBUtil.getClose(connection, statement, null);
+            throw new OrderSystemException("插入订单失败");
+        } finally {
+            DBUtil.getClose(connection, statement, resultSet);
         }
     }
 
+    // 把菜品信息给插入到表 order_dish 中.
     private void addOrderDish(Order order) throws OrderSystemException {
-        Connection connection = null;
+        // 1. 获取数据库连接
+        Connection connection = DBUtil.getConnection();
+        // 2. 拼装 SQL 语句
+        String sql = "insert into order_dish values(?, ?)";
         PreparedStatement statement = null;
         try {
-            connection = DBUtil.getConnection();
-            String sql = "insert into Order_dish values(?, ?)";
-            // 关闭自动提交 sql  (一般默认是自动提交的)
+            // 3. 关闭自动提交
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(sql);
-            // 由于一个订单中有多个菜品,所有得把数组中的菜品一个个取出来插入表中
+            // 由于一个订单对应到多个菜品, 就需要遍历 Order 中包含的菜品数组, 把每个记录都取出来
+            // 4. 遍历 dishes 给 SQL 添加多个 values 的值
             List<Dish> dishes = order.getDishes();
-            for (Dish dish: dishes) {
+            for (Dish dish : dishes)  {
+                // OrderId 是在刚刚进行插入 order_user 表的时候, 获取到的自增主键
                 statement.setInt(1, order.getOrderId());
                 statement.setInt(2, dish.getDishId());
-                //  给 sql 的 values 新增一个片段
-                statement.addBatch();
+                statement.addBatch(); // 给 sql 新增一个片段.
             }
-            statement.executeBatch();  // 执行刚才的 sql 语句，提交 sql
-            connection.commit(); // 真正执行 sql，即发送给服务器
+            // 5. 执行 SQL (并不是真的执行)
+            statement.executeBatch(); // 把刚才的 sql 进行执行.
+            // 6. 发送给服务器 (真的执行), commit 可以去执行多个 SQL, 一次调用 commit 统一发给服务器.
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
-            // 如果此表插订单失败，整体上插入就失败了，回滚之间的 addOrderUser 表的内容
+            // 如果上面的操作出现异常, 就认为整体的新增订单操作失败, 回滚之前的插入 order_user 表的内容
             deleteOrderUser(order.getOrderId());
-        }finally {
+        } finally {
+            // 关闭数据库连接
             DBUtil.getClose(connection, statement, null);
         }
     }
 
-    // 用来删除 order_user 表中的数据
+    // 这个方法用于删除 order_user 表中的记录.
     private void deleteOrderUser(int orderId) throws OrderSystemException {
-        Connection connection = null;
+        // 1. 获取数据库连接
+        Connection connection = DBUtil.getConnection();
+        // 2. 拼装 SQL
+        String sql = "delete from order_user where orderId = ?";
         PreparedStatement statement = null;
         try {
-            connection = DBUtil.getConnection();
-            String sql = "delete from order_user where orderId = ?";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, orderId);
+            // 3. 执行 SQL
             int ret = statement.executeUpdate();
             if (ret != 1) {
                 throw new OrderSystemException("回滚失败");
@@ -111,7 +118,7 @@ public class OrderDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new OrderSystemException("回滚失败");
-        }finally {
+        } finally {
             DBUtil.getClose(connection, statement, null);
         }
     }
@@ -271,16 +278,16 @@ public class OrderDao {
         }
     }
 
-    public static void main(String[] args) throws OrderSystemException {
-        OrderDao orderDao = new OrderDao();
-        Order order = new Order();
-        order.setUserId(1);
-        List<Dish> list = new ArrayList<>();
-        DishDao dishDao = new DishDao();
-        list.add(dishDao.selectById(1));
-        list.add(dishDao.selectById(2));
-        order.setDishes(list);
-        System.out.println(list);
-        orderDao.add(order);
-    }
+//    public static void main(String[] args) throws OrderSystemException {
+//        OrderDao orderDao = new OrderDao();
+//        Order order = new Order();
+//        order.setUserId(1);
+//        List<Dish> list = new ArrayList<>();
+//        DishDao dishDao = new DishDao();
+//        list.add(dishDao.selectById(1));
+//        list.add(dishDao.selectById(2));
+//        order.setDishes(list);
+//        System.out.println(list);
+//        orderDao.add(order);
+//    }
 }

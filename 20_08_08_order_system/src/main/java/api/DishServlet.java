@@ -140,7 +140,7 @@ public class DishServlet extends HttpServlet {
             DishDao dishDao = new DishDao();
             dishes = dishDao.selectAll();
             // 4.构造响应数据
-            String jsonString = gson.toJson(response);
+            String jsonString = gson.toJson(dishes);
             resp.getWriter().write(jsonString);
         } catch (OrderSystemException e) {
             // 失败的时候返回一个空的数组.
