@@ -7,11 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a7700fe-99ce-4dba-9822-d9afdc3b9c0b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../20-10-10/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../20-10-10/src/Main2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../20-10-19/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../20-10-26/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../20-10-26/src/TestDemo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/20_07_23_music/dao/MusicDao.java___jb_tmp___" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +98,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../20_08_08_order_system" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Problems" />
@@ -308,10 +306,10 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="462" y="138" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1603083409495" />
-    <state x="386" y="207" key="com.intellij.ide.util.TipDialog" timestamp="1603081409318">
+    <state x="386" y="207" key="com.intellij.ide.util.TipDialog" timestamp="1604053989335">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="386" y="207" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1603081409318" />
+    <state x="386" y="207" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1604053989335" />
     <state x="57" y="0" key="new project wizard" timestamp="1603099845855">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
